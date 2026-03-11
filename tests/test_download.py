@@ -1,30 +1,21 @@
-import requests
 from pathlib import Path
-from typing import Dict
-import time
+from unittest.mock import Mock, patch
 
-def download_data(file_map: Dict[str, str], target_dir: str = "downloads", max_retries: int = 3) -> None:
-    path = Path(target_dir)
-    path.mkdir(parents=True, exist_ok=True)
+from app.environmental_data import EnvironmentalData
 
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
-    }
 
-    for filename, url in file_map.items():
-        print(f"Downloading {filename} ...")
-        for attempt in range(1, max_retries + 1):
-            try:
-                response = requests.get(url, timeout=30, headers=headers)
-                response.raise_for_status()
-                file_path = path / filename
-                with open(file_path, "wb") as f:
-                    f.write(response.content)
-                print(f"  Saved to {file_path}")
-                break
-            except Exception as e:
-                print(f"  Attempt {attempt} failed: {e}")
-                if attempt == max_retries:
-                    print(f"  Giving up on {filename}")
-                else:
-                    time.sleep(2)  # wait before retry
+def test_download_file_saves_content(tmp_path: Path):
+    destination = tmp_path / "test_file.csv"
+
+    mock_response = Mock()
+    mock_response.content = b"col1,col2\n1,2\n"
+    mock_response.raise_for_status = Mock()
+
+    data = EnvironmentalData.__new__(EnvironmentalData)
+
+    with patch("requests.get", return_value=mock_response) as mock_get:
+        data._download_file("https://example.com/test.csv", destination)
+
+    mock_get.assert_called_once()
+    assert destination.exists()
+    assert destination.read_bytes() == b"col1,col2\n1,2\n"
