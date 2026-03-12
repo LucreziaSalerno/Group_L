@@ -2,18 +2,18 @@ image_analysis:
   model: llava
   prompt: >
     Describe this satellite image in detail. Focus on visible land cover,
-    vegetation, trees, bare soil, roads, urban development, water bodies,
-    smoke, fire scars, mining, flooding, erosion, deforestation,
-    pollution, or any other signs of environmental stress.
+    vegetation, forest density, bare soil, roads, urban development,
+    water bodies, smoke, fire scars, mining, flooding, erosion,
+    deforestation, pollution, or any other signs of environmental stress.
   temperature: 0.2
 
 risk_analysis:
   model: llama3.2:3b
   prompt: >
     You are assessing environmental risk from a satellite-image description.
-    Based only on the description, answer:
-    1. What visible signs may indicate environmental danger?
-    2. Is the area potentially at environmental risk?
+    Based only on the description:
+    1. Briefly explain which visible signs may indicate environmental danger.
+    2. Decide whether the area is potentially at environmental risk.
     3. End your answer with exactly one final label on a new line:
        Y = at risk
        N = not clearly at risk

@@ -205,3 +205,14 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+
+*.pyc
+!docs/*.png
+.DS_Store
+
+# ignore generated satellite images
+images/lat_*.png
+
+# keep documentation screenshots
+!images/example_*.png
