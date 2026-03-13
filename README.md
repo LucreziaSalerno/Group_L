@@ -95,7 +95,7 @@ The application will open in your browser and contains two pages:
 
 ---
 
-## How it works
+## How it Works
 
 The app uses a custom `EnvironmentalData` class (in `app/environmental_data.py`) to handle downloading, caching, and merging the spatial data with the statistical tables. All visualisations are created with [Plotly Express](https://plotly.com/python/plotly-express/), ensuring smooth interactivity.
 
@@ -121,6 +121,26 @@ Artificial intelligence and satellite imagery analysis can play an important rol
 This type of automated analysis could support better-informed decision making and help protect ecosystems, urban environments, and natural resources. It could assist environmental agencies, NGOs, and researchers by offering a faster way to screen large geographic areas and identify locations that may require further investigation. While the system does not replace expert environmental analysis, it can serve as an initial screening tool that helps prioritize where detailed environmental assessments should be conducted. 
 
 Through these capabilities, the project contributes to broader sustainability efforts by supporting environmental monitoring and responsible management of natural resources, which are central objectives of several UN Sustainable Development Goals.
+
+---
+
+## SDGs Associated with This Project
+
+**SDG 13 – Climate Action**
+
+This app can make it easier to observe changes in landscapes over time and support broader efforts to understand how human activities affect the environment. Access to this type of information can help track environmental changes and contribute to a better understanding of climate-related impacts on different regions.
+
+**SDG 15 – Life on Land**
+
+The project contributes to this objective by identifying visible disturbances to natural landscapes, such as mining activity or large-scale excavation. Detecting these types of land alterations can help draw attention to potential ecosystem disruption and support efforts to monitor land use and environmental impact on biodiversity.
+
+**SDG 11 – Sustainable Cities and Communities**
+
+The app can analyze satellite images of urban areas and distinguish between normal infrastructure and potential environmental risks. This type of monitoring can support sustainable urban development by highlighting locations that may require closer environmental assessment.
+
+**SDG 6 – Clean Water and Sanitation**
+
+Although the app does not directly measure water quality, environmental disturbances such as mining or large-scale land excavation can affect nearby water systems. Satellite-based monitoring tools can therefore help identify locations where human activity may pose potential risks to natural resources, including water.
 
 ---
 
