@@ -20,7 +20,7 @@ Advanced Programming for Data Science - Group Project
    │   ├── image_utils.py
    │   └── storage.py
    ├── pages/
-   │   └── 2_AI_Workflow.py
+   │   └── Environmental_Risk_Analyzer.py
    ├── database/
    │   └── images.csv
    ├── images/
