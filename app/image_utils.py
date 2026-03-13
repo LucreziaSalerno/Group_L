@@ -1,5 +1,6 @@
 from pathlib import Path
 from urllib.parse import urlencode
+import time
 
 import requests
 
@@ -28,12 +29,7 @@ def compute_bbox(
     zoom: int,
     base_half_size_degrees: float = 0.8,
 ) -> str:
-    """
-    Build a simple bbox around the chosen point.
-
-    This is a lightweight heuristic for a proof-of-concept app.
-    Larger zoom => smaller bbox.
-    """
+    """Build a simple bbox around the chosen point."""
     zoom = max(1, zoom)
     half_size = base_half_size_degrees / zoom
 
@@ -79,8 +75,10 @@ def download_esri_image(
     width: int,
     height: int,
     base_half_size_degrees: float = 0.8,
+    timeout: int = 120,
+    max_retries: int = 3,
 ) -> Path:
-    """Download the satellite image and save it locally."""
+    """Download the satellite image and save it locally, with retries."""
     url = build_esri_export_url(
         latitude=latitude,
         longitude=longitude,
@@ -90,10 +88,23 @@ def download_esri_image(
         base_half_size_degrees=base_half_size_degrees,
     )
 
-    response = requests.get(url, timeout=60)
-    response.raise_for_status()
+    last_exception = None
 
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    output_path.write_bytes(response.content)
+    for attempt in range(1, max_retries + 1):
+        try:
+            response = requests.get(url, timeout=timeout)
+            response.raise_for_status()
 
-    return output_path
+            output_path.parent.mkdir(parents=True, exist_ok=True)
+            output_path.write_bytes(response.content)
+
+            return output_path
+
+        except requests.exceptions.RequestException as exc:
+            last_exception = exc
+            if attempt < max_retries:
+                time.sleep(2)
+
+    raise RuntimeError(
+        f"Failed to download ESRI image after {max_retries} attempts: {last_exception}"
+    )

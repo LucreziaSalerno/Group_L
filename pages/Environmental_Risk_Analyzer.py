@@ -7,58 +7,65 @@ from streamlit_folium import st_folium
 
 from app.ai_pipeline import (
     assess_environmental_risk,
+    classify_environmental_risk,
+    clean_risk_response,
     describe_image,
-    extract_danger_label,
 )
 from app.image_utils import build_image_filename, download_esri_image
 from app.storage import append_result, find_existing_result, load_database
 
+st.set_page_config(
+    page_title="Environmental Risk Analyzer",
+    page_icon="🌍",
+    layout="wide"
+)
 
-st.set_page_config(page_title="AI Workflow", layout="wide")
+@st.cache_data
+def load_database_cached():
+    return load_database()
 
 
 @st.cache_data
 def load_models_config() -> dict:
-    """Load configuration from models.yaml."""
     with open("models.yaml", "r", encoding="utf-8") as file:
         return yaml.safe_load(file)
 
 
 def get_preset_values(preset_name: str) -> tuple[float, float, int]:
-    """Return default coordinates for known example locations."""
     presets = {
         "Custom": (38.7223, -9.1393, 12),
-        "Amazon deforestation": (-3.4653, -62.2159, 10),
+
+        # stronger fishbone-style deforestation region
+        "Amazon deforestation": (-8.7490, -63.9080, 11),
+
         "Lisbon urban area": (38.7223, -9.1393, 12),
-        "Sahara desert": (23.4162, 25.6628, 10),
-        "California wildfire area": (38.9395, -120.9856, 11),
+        "Sahara desert": (23.4162, 25.6628, 11),
+
+        # optional extra
+        "California wildfire area": (39.8756, -120.4350, 12),
+
+        # stronger open-pit mining candidate
+        "Mining area": (40.5230, -112.1510, 13),
     }
     return presets.get(preset_name, presets["Custom"])
 
 
 def initialize_session_state() -> None:
-    """Initialize session state values once."""
     if "preset" not in st.session_state:
         st.session_state.preset = "Custom"
-
     if "latitude_input" not in st.session_state:
         st.session_state.latitude_input = 38.7223
-
     if "longitude_input" not in st.session_state:
         st.session_state.longitude_input = -9.1393
-
     if "zoom_input" not in st.session_state:
         st.session_state.zoom_input = 12
-
     if "clicked_latitude" not in st.session_state:
         st.session_state.clicked_latitude = None
-
     if "clicked_longitude" not in st.session_state:
         st.session_state.clicked_longitude = None
 
 
 def apply_preset() -> None:
-    """Update lat/lon/zoom from selected preset."""
     lat, lon, zoom = get_preset_values(st.session_state.preset)
     st.session_state.latitude_input = lat
     st.session_state.longitude_input = lon
@@ -66,7 +73,6 @@ def apply_preset() -> None:
 
 
 def apply_clicked_coordinates() -> None:
-    """Copy clicked map coordinates into the sidebar input widgets."""
     if (
         st.session_state.clicked_latitude is not None
         and st.session_state.clicked_longitude is not None
@@ -77,7 +83,6 @@ def apply_clicked_coordinates() -> None:
 
 
 def build_click_map(latitude: float, longitude: float, zoom: int) -> folium.Map:
-    """Create an interactive folium map for coordinate picking."""
     fmap = folium.Map(
         location=[latitude, longitude],
         zoom_start=zoom,
@@ -92,16 +97,49 @@ def build_click_map(latitude: float, longitude: float, zoom: int) -> folium.Map:
     ).add_to(fmap)
 
     folium.LatLngPopup().add_to(fmap)
-
     return fmap
 
+
+def show_result_summary(danger: str, source_label: str) -> None:
+    """Show the main result summary block."""
+    st.header("Analysis Result")
+
+    # Tiny visual improvement
+    badge = "⚠ High environmental concern" if danger == "Y" else "✔️ Stable / low environmental concern"
+    st.markdown(f"**Assessment summary:** {badge}")
+    st.progress(100 if danger == "Y" else 35)
+
+    # Explicit final label
+    label_color = "red" if danger == "Y" else "green"
+    st.markdown(
+        f"**Final classification:** <span style='color:{label_color}; font-weight:bold; font-size:20px'>{danger}</span>", unsafe_allow_html=True
+    )
+
+    # Optional confidence line
+    confidence = "Medium" if danger == "Y" else "Medium"
+    st.markdown(f"**Confidence:** {confidence}")
+
+    col1, col2, col3 = st.columns(3)
+    col1.metric("Latitude", f"{latitude:.4f}")
+    col2.metric("Longitude", f"{longitude:.4f}")
+    col3.metric("Zoom", zoom)
+
+    st.caption(source_label)
+
+    if danger == "Y":
+        st.error("⚠️ Potential environmental risk detected.")
+    else:
+        st.success("✅ No clear environmental risk detected.")
+
+st.divider()
 
 initialize_session_state()
 config = load_models_config()
 images_dir = Path("images")
 images_dir.mkdir(exist_ok=True)
 
-st.title("AI Workflow")
+st.title("🌍 Environmental Risk Analyzer")
+st.caption("Analyze satellite images with local AI models to detect potential environmental risks.")
 st.markdown(
     """
     This page downloads a satellite image from **ESRI World Imagery**,
@@ -121,6 +159,7 @@ with st.sidebar:
             "Lisbon urban area",
             "Sahara desert",
             "California wildfire area",
+            "Mining area",
         ],
         key="preset",
         on_change=apply_preset,
@@ -144,12 +183,7 @@ with st.sidebar:
         key="longitude_input",
     )
 
-    st.slider(
-        "Zoom",
-        min_value=1,
-        max_value=18,
-        key="zoom_input",
-    )
+    st.slider("Zoom", min_value=1, max_value=18, key="zoom_input")
 
     run_button = st.button("Run analysis", use_container_width=True)
 
@@ -158,13 +192,13 @@ longitude = float(st.session_state.longitude_input)
 zoom = int(st.session_state.zoom_input)
 
 st.subheader("Selected Coordinates")
-col1, col2, col3 = st.columns(3)
-col1.metric("Latitude", f"{latitude:.4f}")
-col2.metric("Longitude", f"{longitude:.4f}")
-col3.metric("Zoom", zoom)
+c1, c2, c3 = st.columns(3)
+c1.metric("Latitude", f"{latitude:.4f}")
+c2.metric("Longitude", f"{longitude:.4f}")
+c3.metric("Zoom", zoom)
 
 st.subheader("Pick coordinates from the map")
-st.caption("Click on the map, then use the button below to update the inputs.")
+st.caption("Click on the map to select coordinates, then press 'Use clicked coordinates'.")
 
 map_data = st_folium(
     build_click_map(latitude, longitude, zoom),
@@ -183,48 +217,43 @@ if last_clicked:
     st.session_state.clicked_latitude = clicked_lat
     st.session_state.clicked_longitude = clicked_lon
 
-    st.info(
-        f"Map click detected — Latitude: {clicked_lat}, Longitude: {clicked_lon}"
-    )
-
-    st.button(
-        "Use clicked coordinates",
-        on_click=apply_clicked_coordinates,
-    )
+    st.success(f"Selected point → Latitude: {clicked_lat}, Longitude: {clicked_lon}")
+    st.button("Use clicked coordinates", on_click=apply_clicked_coordinates)
 
 image_filename = build_image_filename(latitude, longitude, zoom)
 image_path = images_dir / image_filename
 
 if run_button:
-    db = load_database()
+    db = load_database_cached()
     existing = find_existing_result(db, latitude, longitude, zoom)
 
     if existing is not None:
-        st.info(
-            "Loaded from a previous saved analysis. The pipeline was not re-run."
+        danger = str(existing["danger"]).upper()
+        image_description = str(existing["image_description"])
+        risk_text = clean_risk_response(str(existing["text_description"]))
+
+        show_result_summary(
+            danger=danger,
+            source_label="Loaded from a previous saved analysis. The pipeline was not re-run.",
         )
 
-        result_col1, result_col2 = st.columns([1.1, 1])
-
-        with result_col1:
-            st.subheader("Satellite image")
-            stored_image_path = Path(existing["image_path"])
-            if stored_image_path.exists():
-                st.image(str(stored_image_path), use_container_width=True)
-            else:
-                st.warning("Stored image file was not found locally.")
-
-        with result_col2:
-            st.subheader("Image description")
-            st.write(existing["image_description"])
-
-        st.subheader("Risk assessment")
-        st.write(existing["text_description"])
-
-        if str(existing["danger"]).upper() == "Y":
-            st.error("⚠️ Potential environmental risk detected.")
+        # Image first
+        st.subheader("Satellite image")
+        stored_image_path = Path(existing["image_path"])
+        if stored_image_path.exists():
+            st.image(str(stored_image_path), use_container_width=True)
         else:
-            st.success("✅ No clear environmental risk detected.")
+            st.warning(
+                "Stored image file was not found locally. It may have been renamed, moved, or deleted."
+            )
+
+        # Risk result second
+        st.subheader("Risk assessment")
+        st.write(risk_text)
+
+        # Description after
+        st.subheader("Image description")
+        st.write(image_description)
 
         with st.expander("Technical details"):
             st.write(
@@ -233,6 +262,7 @@ if run_button:
                     "risk_model": existing["text_model"],
                     "image_path": existing["image_path"],
                     "loaded_from_database": True,
+                    "danger_label": danger,
                 }
             )
 
@@ -241,20 +271,22 @@ if run_button:
         image_cfg = config["image_analysis"]
         risk_cfg = config["risk_analysis"]
 
-        with st.spinner("Downloading satellite image from ESRI World Imagery..."):
-            download_esri_image(
-                latitude=latitude,
-                longitude=longitude,
-                zoom=zoom,
-                output_path=image_path,
-                width=imagery_cfg["width"],
-                height=imagery_cfg["height"],
-                base_half_size_degrees=imagery_cfg.get(
-                    "bbox_half_size_degrees_base", 0.8
-                ),
-            )
-
-        st.success("New image downloaded successfully.")
+        try:
+            with st.spinner("Downloading satellite image from ESRI World Imagery..."):
+                download_esri_image(
+                    latitude=latitude,
+                    longitude=longitude,
+                    zoom=zoom,
+                    output_path=image_path,
+                    width=imagery_cfg["width"],
+                    height=imagery_cfg["height"],
+                    base_half_size_degrees=imagery_cfg.get(
+                        "bbox_half_size_degrees_base", 0.8
+                    ),
+                )
+        except Exception as exc:
+            st.error(f"Satellite image download failed: {exc}")
+            st.stop()
 
         try:
             with st.spinner("Analyzing image with vision model..."):
@@ -262,43 +294,52 @@ if run_button:
                     image_path=image_path,
                     model_name=image_cfg["model"],
                     prompt=image_cfg["prompt"],
-                    temperature=image_cfg.get("temperature", 0.2),
+                    temperature=image_cfg.get("temperature", 0.1),
                 )
         except Exception as exc:
             st.error(f"Image description failed: {exc}")
             st.stop()
 
+        
         try:
             with st.spinner("Assessing environmental risk..."):
                 risk_response = assess_environmental_risk(
                     description=image_description,
                     model_name=risk_cfg["model"],
                     prompt=risk_cfg["prompt"],
-                    temperature=risk_cfg.get("temperature", 0.2),
+                    temperature=risk_cfg.get("temperature", 0.1),
                 )
         except Exception as exc:
             st.error(f"Risk assessment failed: {exc}")
             st.stop()
+        
+        try:
+            danger = classify_environmental_risk(
+                description=image_description,
+                model_name=risk_cfg["model"],
+            )
+        except Exception as exc:
+            st.error(f"Final risk classification failed: {exc}")
+            st.stop()
+            
+        display_risk_response = clean_risk_response(risk_response)
 
-        danger = extract_danger_label(risk_response)
+        show_result_summary(
+            danger=danger,
+            source_label="New analysis completed and saved to database/images.csv",
+        )
 
-        result_col1, result_col2 = st.columns([1.1, 1])
+        # Image first
+        st.subheader("Satellite image")
+        st.image(str(image_path), use_container_width=True)
 
-        with result_col1:
-            st.subheader("Satellite image")
-            st.image(str(image_path), use_container_width=True)
-
-        with result_col2:
-            st.subheader("Image description")
-            st.write(image_description)
-
+        # Risk result second
         st.subheader("Risk assessment")
-        st.write(risk_response)
+        st.write(display_risk_response)
 
-        if danger == "Y":
-            st.error("⚠️ Potential environmental risk detected.")
-        else:
-            st.success("✅ No clear environmental risk detected.")
+        # Description after
+        st.subheader("Image description")
+        st.write(image_description)
 
         append_result(
             latitude=latitude,
@@ -314,8 +355,6 @@ if run_button:
             danger=danger,
         )
 
-        st.success("New analysis completed and saved to database/images.csv")
-
         with st.expander("Technical details"):
             st.write(
                 {
@@ -323,13 +362,16 @@ if run_button:
                     "risk_model": risk_cfg["model"],
                     "image_path": str(image_path),
                     "loaded_from_database": False,
+                    "danger_label": danger,
                 }
             )
 
 st.divider()
 
 st.subheader("Previous analyses")
-db_preview = load_database()
+db_preview = load_database_cached()
+
+st.metric("Total analyses stored", len(db_preview))
 
 if not db_preview.empty:
     preview_columns = [
@@ -341,6 +383,11 @@ if not db_preview.empty:
         "image_model",
         "text_model",
     ]
+
+    # Make danger column easier to read
+    db_preview["danger"] = db_preview["danger"].map(
+        {"Y": "⚠ Risk", "N": "✔ Safe"}
+    )
     available_columns = [col for col in preview_columns if col in db_preview.columns]
     st.dataframe(
         db_preview[available_columns].tail(10),

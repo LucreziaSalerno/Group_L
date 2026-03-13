@@ -1,6 +1,6 @@
 # Environmental Data Explorer & AI Environmental Risk Assessment - Group_L
 
-Advanced Programming for Data Science — Group Project
+Advanced Programming for Data Science - Group Project
 
 ## Authors
 - Artur Bastos — [52011] — [52011@novasbe.pt]
@@ -62,7 +62,7 @@ Advanced Programming for Data Science — Group Project
 
 The application will open in your browser and contains two pages:
 - **Environmental Data Explorer**
-- **AI Workflow**
+- **Environmental Risk Analyzer**
 
 ---
 
@@ -70,7 +70,7 @@ The application will open in your browser and contains two pages:
 
 **Environmental Data Explorer** is an interactive dashboard built with [Streamlit](https://streamlit.io) that visualises key environmental indicators from [Our World in Data](https://ourworldindata.org). It allows users to explore global trends in forest change, deforestation, protected land, degraded land, and the Red List Index – all with the most recent data available.
 
-**AI Workflow** analyzes satellite imagery to detect potential environmental risks.
+**Environmental Risk Analyzer** analyzes satellite imagery to detect potential environmental risks.
 
 ## Features
 
@@ -80,13 +80,18 @@ The application will open in your browser and contains two pages:
 - **Interactive choropleth map** – Choose a dataset and a year; the map colours countries according to their value, with hover details.
 - **Top / bottom countries** – A bar chart automatically displays the five countries with the highest and the five with the lowest values for the selected indicator.
 
-### AI Workflow
+### Environmental Risk Analyzer
 
-- **Satellite image download** – The app retrieves satellite imagery from **ESRI World Imagery**.
-- **AI image description** – A vision model generates a detailed description of the satellite image.
-- **Environmental risk analysis** – A second AI model evaluates whether the area may be environmentally at risk.
-- **Interactive coordinate selection** – Users can manually enter coordinates, choose preset locations, or click directly on a map.
-- **Result caching** – Previously analyzed coordinates are stored locally to avoid recomputation.
+- **Interactive coordinate selection** - Users can manually enter coordinates, choose preset locations, or click directly on a map.
+- **Satellite image download** - The app retrieves satellite imagery from **ESRI World Imagery**.
+- **AI image description** - The LLaVA model describes the satellite image by identifying visible landscape features..
+- **Environmental risk classification** – A second AI model (Llama 3.2) evaluates whether the area may be environmentally at risk.
+- **Result caching** - Previously analyzed coordinates are stored in [Images database](database/images.csv) to avoid recomputation.
+- **Results Dashboard** - The app presents:
+   - risk classification
+   - confidence indicator
+   - coordinates and zoom level
+   - AI-generated explanation
 
 ---
 
@@ -94,7 +99,7 @@ The application will open in your browser and contains two pages:
 
 The app uses a custom `EnvironmentalData` class (in `app/environmental_data.py`) to handle downloading, caching, and merging the spatial data with the statistical tables. All visualisations are created with [Plotly Express](https://plotly.com/python/plotly-express/), ensuring smooth interactivity.
 
-For the AI workflow, additional modules in the `app/` folder manage the analysis pipeline:
+For the Environmental Risk Analyzer, additional modules in the `app/` folder manage the analysis pipeline:
 
 - **image_utils.py**  
   Handles downloading satellite images from ESRI World Imagery.
@@ -106,3 +111,49 @@ For the AI workflow, additional modules in the `app/` folder manage the analysis
   Saves results to `database/images.csv` and checks whether the same coordinates have already been analyzed.
 
 The AI models and prompts are configured in **models.yaml**, allowing the workflow to be adjusted without modifying the code.
+
+---
+
+## Example Results
+
+### Mining Area - Risk Detected (Y)
+
+Latitude: 40.5230
+Longitude: -112.1510
+Zoom: 13
+
+![Mining Area Example](images/example_mining.png)
+
+The model identifies visible signs of large-scale mining activity, including exposed soil and excavation structures.
+
+Risk Assessment: **Potential environmental risk detected**
+
+---
+
+### Lisbon Urban Area - No risk degtected (N)
+
+Latitude: 38.7223  
+Longitude: -9.1393  
+Zoom: 12  
+
+![Lisbon Example](images/example_lisbon.png)
+
+The satellite image shows dense urban infrastructure without visible environmental damage.
+
+Risk assessment: **No clear environmental risk detected**
+
+---
+
+### Sahara Desert - No risk detected (N)
+
+Latitude: 23.4162  
+Longitude: 25.6628  
+Zoom: 11  
+
+![Sahara Example](images/example_sahara.png)
+
+The model correctly recognizes the landscape as a natural desert environment with sparse vegetation.
+
+Risk assessment: **No clear environmental risk detected**
+
+---

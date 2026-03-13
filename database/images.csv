@@ -1,280 +1,46 @@
 timestamp,latitude,longitude,zoom,image_path,image_description,image_prompt,image_model,text_description,text_prompt,text_model,danger
-2026-03-11T23:16:28,38.7223,-9.1393,12,images/lat_38_7223_lon_m9_1393_zoom_12.png,"The image is a satellite view of a coastal area. The land cover is a mix of urban development and natural features. The urban development includes a grid of streets and buildings, with some areas showing dense construction and others with more open spaces. There are green areas that appear to be parks or gardens, interspersed with the urban areas. The coastline is visible with a body of water adjacent to the land, and there are no signs of smoke, fire, or pollution in the visible areas. The vegetation is sparse, with some patches of green indicating trees or shrubs. There are no visible signs of mining, flooding, erosion, or deforestation in the image. The water body is calm, and there are no visible signs of smoke or fire. The overall image suggests a well-developed coastal city with a mix of urban and natural environments.","Describe this satellite image in detail. Focus on visible land cover, vegetation, trees, bare soil, roads, urban development, water bodies, smoke, fire scars, mining, flooding, erosion, deforestation, pollution, or any other signs of environmental stress.
-",llava,"1. Visible signs that may indicate environmental danger are not mentioned in the description.
-
-2. Based on the description, the area does not appear to be at environmental risk, as there are no visible signs of pollution, mining, flooding, erosion, or deforestation.
-
- 
-N","You are assessing environmental risk from a satellite-image description. Based only on the description, answer: 1. What visible signs may indicate environmental danger? 2. Is the area potentially at environmental risk? 3. End your answer with exactly one final label on a new line:
-   Y = at risk
-   N = not clearly at risk
+2026-03-12T21:39:34,-8.749,-63.908,11,images/lat_m8_7490_lon_m63_9080_zoom_11.png,"The image is a satellite view of a landscape, showcasing a mix of natural and urban elements. The most prominent feature is a river that meanders through the center of the image, with a bridge visible over it. The surrounding area is a blend of green and brown, indicating a mix of forested and urbanized areas. There are clearings where the land is mostly bare, and roads that cut through the landscape, connecting different parts of the area. The urban areas are densely populated, with buildings tightly packed together. There are also water bodies, including a large body of water to the left of the image. The overall vegetation density is moderate, with patches of green interspersed with areas of bare land. There are no visible signs of smoke, fire scars, mining pits, tailings, or erosion. The image does not provide enough information to confidently assess the presence of flooding or the extent of bare soil.","Describe this satellite image carefully.
+Focus only on what is clearly visible: - forest cover - clearings - roads - urban areas - water bodies - smoke - fire scars - mining pits - tailings - bare soil - erosion - flooding - vegetation density
+Do not speculate too much. Mention only features that are clearly visible. Keep the description concise, around 4-6 sentences.
+",llava,"Based on the satellite image description, the area appears to be at moderate environmental risk due to the presence of urbanized areas with densely packed buildings, which can lead to increased pollution and habitat destruction. The mix of forested and urbanized areas also suggests potential conflicts between human development and natural ecosystems. However, the lack of visible signs of pollution, deforestation, mining, or erosion suggests that the area may not be experiencing severe environmental degradation at this time.","You are an environmental risk assessor.
+Based only on the satellite-image description, explain briefly whether the area may be at environmental risk.
+Consider visible evidence such as: - deforestation - mining - fire scars - smoke - flooding - severe erosion - strong pollution - major land degradation
+If none of these are clearly visible, explain why the area appears stable.
+Give a short explanation in 2-4 sentences.
 ",llama3.2:3b,N
-2026-03-11T23:49:38,38.7556,-9.2717,14,images/lat_38_7556_lon_m9_2717_zoom_14.png,"The image you've provided appears to be a satellite view of a landscape, possibly a region of interest for environmental analysis. Here's a detailed description based on the visible features:
-
-1. **Vegetation**: The landscape is predominantly covered with green vegetation, indicating a healthy ecosystem. There are patches of bare soil, which could be indicative of agricultural activity or areas where vegetation has been cleared.
-
-2. **Urban Development**: There are several areas of urban development visible. These are characterized by the presence of roads, buildings, and other infrastructure. The roads are typically straight and run parallel to each other, suggesting a planned urban layout.
-
-3. **Water Bodies**: There are a few water bodies visible, which could be rivers, lakes, or other water features. These bodies of water are surrounded by greenery, indicating a healthy ecosystem.
-
-4. **Trees**: There are numerous trees scattered throughout the landscape. These trees are likely part of the natural vegetation and contribute to the overall green cover of the area.
-
-5. **Bare Soil**: There are patches of bare soil, which could be indicative of agricultural activity or areas where vegetation has been cleared.
-
-6. **Roads**: The roads are typically straight and run parallel to each other, suggesting a planned urban layout.
-
-7. **Urban Development**: There are several areas of urban development visible. These are characterized by the presence of buildings, roads, and other infrastructure.
-
-8. **Water Bodies**: There are a few water bodies visible, which could be rivers, lakes, or other water features. These bodies of water are surrounded by greenery, indicating a healthy ecosystem.
-
-9. **Trees**: There are numerous trees scattered throughout the landscape. These trees are likely part of the natural vegetation and contribute to the overall green cover of the area.
-
-10. **Bare Soil**: There are patches of bare soil, which could be indicative of agricultural activity or areas where vegetation has been cleared.
-
-11. **Roads**: The roads are typically straight and run parallel to each other, suggesting a planned urban layout.
-
-12. **Urban Development**: There are several areas of urban development visible. These are characterized by the presence of buildings, roads, and other infrastructure.
-
-13. **Water Bodies**: There are a few water bodies visible, which could be rivers, lakes, or other water features. These bodies of water are surrounded by greenery, indicating a healthy ecosystem.
-
-14. **Trees**: There are numerous trees scattered throughout the landscape. These trees are likely part of the natural vegetation and contribute to the overall green cover of the area.
-
-15. **Bare Soil**: There are patches of bare soil, which could be indicative of agricultural activity or areas where vegetation has been cleared.
-
-16. **Roads**: The roads are typically straight and run parallel to each other, suggesting a planned urban layout.
-
-17. **Urban Development**: There are several areas of urban development visible. These are characterized by the presence of buildings, roads, and other infrastructure.
-
-18. **Water Bodies**: There are a few water bodies visible, which could be rivers, lakes, or other water features. These bodies of water are surrounded by greenery, indicating a healthy ecosystem.
-
-19. **Trees**: There are numerous trees scattered throughout the landscape. These trees are likely part of the natural vegetation and contribute to the overall green cover of the area.
-
-20. **Bare Soil**: There are patches of bare soil, which could be indicative of agricultural activity or areas where vegetation has been cleared.
-
-21. **Roads**: The roads are typically straight and run parallel to each other, suggesting a planned urban layout.
-
-22. **Urban Development**: There are several areas of urban development visible. These are characterized by the presence of buildings, roads, and other infrastructure.
-
-23. **Water Bodies**: There are a few water bodies visible, which could be rivers, lakes, or other water features. These bodies of water are surrounded by greenery, indicating a healthy ecosystem.
-
-24. **Trees**: There are numerous trees scattered throughout the landscape. These trees are likely part of the natural vegetation and contribute to the overall green cover of the area.
-
-25. **Bare Soil**: There are patches of bare soil, which could be indicative of agricultural activity or areas where vegetation has been cleared.
-
-26. **Roads**: The roads are typically straight and run parallel to each other, suggesting a planned urban layout.
-
-27. **Urban Development**: There are several areas of urban development visible. These are characterized by the presence of buildings, roads, and other infrastructure.
-
-28. **Water Bodies**: There are a few water bodies visible, which could be rivers, lakes, or other water features. These bodies of water are surrounded by greenery, indicating a healthy ecosystem.
-
-29. **Trees**: There are numerous trees scattered throughout the landscape. These trees are likely part of the natural vegetation and contribute to the overall green cover of the area.
-
-30. **Bare Soil**: There are patches of bare soil, which could be indicative of agricultural activity or areas where vegetation has been cleared.
-
-31. **Roads**: The roads are typically straight and run parallel to each other, suggesting a planned urban layout.
-
-32. **Urban Development**: There are several areas of urban development visible. These are characterized by the presence of buildings, roads, and other infrastructure.
-
-33. **Water Bodies**: There are a few water bodies visible, which could be rivers, lakes, or other water features. These bodies of water are surrounded by greenery, indicating a healthy ecosystem.
-
-34. **Trees**: There are numerous trees scattered throughout the landscape. These trees are likely part of the natural vegetation and contribute to the overall green cover of the area.
-
-35. **Bare Soil**: There are patches of bare soil, which could be indicative of agricultural activity or areas where vegetation has been cleared.
-
-36. **Roads**: The roads are typically straight and run parallel to each other, suggesting a planned urban layout.
-
-37. **Urban Development**: There are several areas of urban development visible. These are characterized by the presence of buildings, roads, and other infrastructure.
-
-38. **Water Bodies**: There are a few water bodies visible, which could be rivers, lakes, or other water features. These bodies of water are surrounded by greenery, indicating a healthy ecosystem.
-
-39. **Trees**: There are numerous trees scattered throughout the landscape. These trees are likely part of the natural vegetation and contribute to the overall green cover of the area.
-
-40. **Bare Soil**: There are patches of bare soil, which could be indicative of agricultural activity or areas where vegetation has been cleared.
-
-41. **Roads**: The roads are typically straight and run parallel to each other, suggesting a planned urban layout.
-
-42. **Urban Development**: There are several areas of urban development visible. These are characterized by the presence of buildings, roads, and other infrastructure.
-
-43. **Water Bodies**: There are a few water bodies visible, which could be rivers, lakes, or other water features. These bodies of water are surrounded by greenery, indicating a healthy ecosystem.
-
-44. **Trees**: There are numerous trees scattered throughout the landscape. These trees are likely part of the natural vegetation and contribute to the overall green cover of the area.
-
-45. **Bare Soil**: There are patches of bare soil, which could be indicative of agricultural activity or areas where vegetation has been cleared.
-
-46. **Roads**: The roads are typically straight and run parallel to each other, suggesting a planned urban layout.
-
-47. **Urban Development**: There are several areas of urban development visible. These are characterized by the presence of buildings, roads, and other infrastructure.
-
-48. **Water Bodies**: There are a few water bodies visible, which could be rivers, lakes, or other water features. These bodies of water are surrounded by greenery, indicating a healthy ecosystem.
-
-49. **Trees**: There are numerous trees scattered throughout the landscape. These trees are likely part of the natural vegetation and contribute to the overall green cover of the area.
-
-50. **Bare Soil**: There are patches of bare soil, which could be indicative of agricultural activity or areas where vegetation has been cleared.
-
-51. **Roads**: The roads are typically straight and run parallel to each other, suggesting a planned urban layout.
-
-52. **Urban Development**: There are several areas of urban development visible. These are characterized by the presence of buildings, roads, and other infrastructure.
-
-53. **Water Bodies**: There are a few water bodies visible, which could be rivers, lakes, or other water features. These bodies of water are surrounded by greenery, indicating a healthy ecosystem.
-
-54. **Trees**: There are numerous trees scattered throughout the landscape. These trees are likely part of the natural vegetation and contribute to the overall green cover of the area.
-
-55. **Bare Soil**: There are patches of bare soil, which could be indicative of agricultural activity or areas where vegetation has been cleared.
-
-56. **Roads**: The roads are typically straight and run parallel to each other, suggesting a planned urban layout.
-
-57. **Urban Development**: There are several areas of urban development visible. These are characterized by the presence of buildings, roads, and other infrastructure.
-
-58. **Water Bodies**: There are a few water bodies visible, which could be rivers, lakes, or other water features. These bodies of water are surrounded by greenery, indicating a healthy ecosystem.
-
-59. **Trees**: There are numerous trees scattered throughout the landscape. These trees are likely part of the natural vegetation and contribute to the overall green cover of the area.
-
-60. **Bare Soil**: There are patches of bare soil, which could be indicative of agricultural activity or areas where vegetation has been cleared.
-
-61. **Roads**: The roads are typically straight and run parallel to each other, suggesting a planned urban layout.
-
-62. **Urban Development**: There are several areas of urban development visible. These are characterized by the presence of buildings, roads, and other infrastructure.
-
-63. **Water Bodies**: There are a few water bodies visible, which could be rivers, lakes, or other water features. These bodies of water are surrounded by greenery, indicating a healthy ecosystem.
-
-64. **Trees**: There are numerous trees scattered throughout the landscape. These trees are likely part of the natural vegetation and contribute to the overall green cover of the area.
-
-65. **Bare Soil**: There are patches of bare soil, which could be indicative of agricultural activity or areas where vegetation has been cleared.
-
-66. **Roads**: The roads are typically straight and run parallel to each other, suggesting a planned urban layout.
-
-67. **Urban Development**: There are several areas of urban development visible. These are characterized by the presence of buildings, roads, and other infrastructure.
-
-68. **Water Bodies**: There are a few water bodies visible, which could be rivers, lakes, or other water features. These bodies of water are surrounded by greenery, indicating a healthy ecosystem.
-
-69. **Trees**: There are numerous trees scattered throughout the landscape. These trees are likely part of the natural vegetation and contribute to the overall green cover of the area.
-
-70. **Bare Soil**: There are patches of bare soil, which could be indicative of agricultural activity or areas where vegetation has been cleared.
-
-71. **Roads**: The roads are typically straight and run parallel to each other, suggesting a planned urban layout.
-
-72. **Urban Development**: There are several areas of urban development visible. These are characterized by the presence of buildings, roads, and other infrastructure.
-
-73. **Water Bodies**: There are a few water bodies visible, which could be rivers, lakes, or other water features. These bodies of water are surrounded by greenery, indicating a healthy ecosystem.
-
-74. **Trees**: There are numerous trees scattered throughout the landscape. These trees are likely part of the natural vegetation and contribute to the overall green cover of the area.
-
-75. **Bare Soil**: There are patches of bare soil, which could be indicative of agricultural activity or areas where vegetation has been cleared.
-
-76. **Roads**: The roads are typically straight and run parallel to each other, suggesting a planned urban layout.
-
-77. **Urban Development**: There are several areas of urban development visible. These are characterized by the presence of buildings, roads, and other infrastructure.
-
-78. **Water Bodies**: There are a few water bodies visible, which could be rivers, lakes, or other water features. These bodies of water are surrounded by greenery, indicating a healthy ecosystem.
-
-79. **Trees**: There are numerous trees scattered throughout the landscape. These trees are likely part of the natural vegetation and contribute to the overall green cover of the area.
-
-80. **Bare Soil**: There are patches of bare soil, which could be indicative of agricultural activity or areas where vegetation has been cleared.
-
-81. **Roads**: The roads are typically straight and run parallel to each other, suggesting a planned urban layout.
-
-82. **Urban Development**: There are several areas of urban development visible. These are characterized by the presence of buildings, roads, and other infrastructure.
-
-83. **Water Bodies**: There are a few water bodies visible, which could be rivers, lakes, or other water features. These bodies of water are surrounded by greenery, indicating a healthy ecosystem.
-
-84. **Trees**: There are numerous trees scattered throughout the landscape. These trees are likely part of the natural vegetation and contribute to the overall green cover of the area.
-
-85. **Bare Soil**: There are patches of bare soil, which could be indicative of agricultural activity or areas where vegetation has been cleared.
-
-86. **Roads**: The roads are typically straight and run parallel to each other, suggesting a planned urban layout.
-
-87. **Urban Development**: There are several areas of urban development visible. These are characterized by the presence of buildings, roads, and other infrastructure.
-
-88. **Water Bodies**: There are a few water bodies visible, which could be rivers, lakes, or other water features. These bodies of water are surrounded by greenery, indicating a healthy ecosystem.
-
-89. **Trees**: There are numerous trees scattered throughout the landscape. These trees are likely part of the natural vegetation and contribute to the overall green cover of the area.
-
-90. **Bare Soil**: There are patches of bare soil, which could be indicative of agricultural activity or areas where vegetation has been cleared.
-
-91. **Roads**: The roads are typically straight and run parallel to each other, suggesting a planned urban layout.
-
-92. **Urban Development**: There are several areas of urban development visible. These are characterized by the presence of buildings, roads, and other infrastructure.
-
-93. **Water Bodies**: There are a few water bodies visible, which could be rivers, lakes, or other water features. These bodies of water are surrounded by greenery, indicating a healthy ecosystem.
-
-94. **Trees**: There are numerous trees scattered throughout the landscape. These trees are likely part of the natural vegetation and contribute to the overall green cover of the area.
-
-95. **Bare Soil**: There are patches of bare soil, which could be indicative of agricultural activity or areas where vegetation has been cleared.
-
-96. **Roads**: The roads are typically straight and run parallel to each other, suggesting a planned urban layout.
-
-97. **Urban Development**: There are several areas of urban development visible. These are characterized by the presence of buildings, roads, and other infrastructure.
-
-98. **Water Bodies**: There are a few water bodies visible, which could be rivers, lakes, or other water features. These bodies of water are surrounded by greenery, indicating a healthy ecosystem.
-
-99. **Trees**: There are numerous trees scattered throughout the landscape. These trees are likely part of the natural vegetation and contribute to the overall green cover of the area.
-
-100. **Bare Soil**: There are patches of bare soil, which could be indicative of agricultural activity or areas where vegetation has been cleared.","Describe this satellite image in detail. Focus on visible land cover, vegetation, trees, bare soil, roads, urban development, water bodies, smoke, fire scars, mining, flooding, erosion, deforestation, pollution, or any other signs of environmental stress.
-",llava,"1. Visible signs that may indicate environmental danger include:
-   - Patches of bare soil, which could be indicative of agricultural activity or areas where vegetation has been cleared.
-   - Unusual or excessive levels of pollution, such as oil spills or chemical runoff.
-   - Signs of deforestation or habitat destruction.
-   - Abnormal water quality or unusual water features.
-   - Presence of hazardous waste or toxic substances.
-
-2. Based on the description, the area appears to be a planned urban landscape with a mix of natural and developed features. While there are some patches of bare soil, the overall landscape appears to be healthy and well-maintained. The presence of greenery, water bodies, and trees suggests a balanced ecosystem. However, without further information, it is difficult to determine if the area is at risk of environmental danger.
-
-3. Y","You are assessing environmental risk from a satellite-image description. Based only on the description, answer: 1. What visible signs may indicate environmental danger? 2. Is the area potentially at environmental risk? 3. End your answer with exactly one final label on a new line:
-   Y = at risk
-   N = not clearly at risk
+2026-03-12T21:40:27,40.523,-112.151,13,images/lat_40_5230_lon_m112_1510_zoom_13.png,"The satellite image presents a stark view of a mining operation in progress. The most prominent feature is a large, open-pit mine, which is surrounded by a significant amount of bare soil and erosion. The mine itself is filled with a variety of mining equipment, including trucks and excavators. The surrounding area is mostly barren, with sparse vegetation and a few small water bodies. The landscape is characterized by a mix of clearings and forested areas, with roads and urban areas interspersed throughout. The image does not show any smoke or fire scars, and there is no visible water body or tailings. The overall scene suggests a large-scale mining operation with significant environmental impact.","Describe this satellite image carefully.
+Focus only on what is clearly visible: - forest cover - clearings - roads - urban areas - water bodies - smoke - fire scars - mining pits - tailings - bare soil - erosion - flooding - vegetation density
+Do not speculate too much. Mention only features that are clearly visible. Keep the description concise, around 4-6 sentences.
+",llava,"Based on the satellite image description, the area appears to be at environmental risk due to the presence of a large open-pit mine, which is likely to cause significant deforestation, soil erosion, and habitat destruction. The barren landscape and sparse vegetation surrounding the mine suggest that the area has been degraded, and the lack of visible water bodies or tailings indicates that the mine's water management practices may be inadequate. The overall scene suggests a large-scale mining operation with significant environmental impact, which increases the risk of environmental degradation and potential long-term consequences.","You are an environmental risk assessor.
+Based only on the satellite-image description, explain briefly whether the area may be at environmental risk.
+Consider visible evidence such as: - deforestation - mining - fire scars - smoke - flooding - severe erosion - strong pollution - major land degradation
+If none of these are clearly visible, explain why the area appears stable.
+Give a short explanation in 2-4 sentences.
 ",llama3.2:3b,Y
-2026-03-12T11:33:29,23.4162,25.6628,10,images/lat_23_4162_lon_25_6628_zoom_10.png,"The image you've provided appears to be a satellite image of a desert landscape. Here's a detailed description based on the visible elements:
-
-1. **Land Cover**: The image shows a predominantly arid landscape with sparse vegetation. The terrain is characterized by sand dunes and rocky outcrops.
-
-2. **Vegetation**: There are patches of vegetation scattered across the landscape, indicating the resilience of life in such harsh conditions.
-
-3. **Bare Soil**: Large areas of the landscape are covered in bare soil, which is typical for desert environments.
-
-4. **Roads and Urban Development**: There are no visible roads or urban development in this image. The landscape is untouched and natural.
-
-5. **Water Bodies**: There are no visible water bodies in this image.
-
-6. **Smoke, Fire Scars, Mining, Flooding, Erosion, Deforestation, Pollution, or Environmental Stress**: There are no signs of smoke, fire scars, mining, flooding, erosion, deforestation, pollution, or any other signs of environmental stress in this image.
-
-7. **Trees**: There are no trees visible in this image.
-
-8. **Bare Ground**: The ground is mostly bare, with only a few patches of vegetation.
-
-9. **Rocky Outcrops**: There are several rocky outcrops scattered across the landscape, adding to the ruggedness of the terrain.
-
-10. **Satellite Image Quality**: The image quality is clear, allowing for detailed observation of the landscape.
-
-Please note that this description is based on the visible elements in the image and does not include any inferred or assumed information.","Describe this satellite image in detail. Focus on visible land cover, vegetation, trees, bare soil, roads, urban development, water bodies, smoke, fire scars, mining, flooding, erosion, deforestation, pollution, or any other signs of environmental stress.
-",llava,"1. Visible signs that may indicate environmental danger are not present in this image, as there are no signs of pollution, environmental stress, or other hazards.
-
-2. Based on the description, the area does not appear to be at environmental risk, as there are no visible signs of pollution, environmental stress, or other hazards.
-
-Final Label: N","You are assessing environmental risk from a satellite-image description. Based only on the description, answer: 1. What visible signs may indicate environmental danger? 2. Is the area potentially at environmental risk? 3. End your answer with exactly one final label on a new line:
-   Y = at risk
-   N = not clearly at risk
-",llama3.2:3b,Y
-2026-03-12T14:34:37,48.8069,2.3511,12,images/lat_48_8069_lon_2_3511_zoom_12.png,"The image you've provided is a satellite view of an urban area, showing a mix of land cover types. The most prominent feature is the dense urban development, which includes a variety of buildings and infrastructure. There are roads and pathways that crisscross the area, indicating a well-developed transportation network.
-
-The vegetation is sparse, with patches of green areas interspersed among the urban structures. These green spaces are likely parks or gardens, providing a contrast to the concrete and asphalt of the city.
-
-There are no visible signs of deforestation, smoke, fire scars, mining, flooding, erosion, or deforestation in this image. The water bodies are not clearly distinguishable due to the resolution and angle of the satellite image.
-
-The image does not show any signs of environmental stress such as pollution or bare soil, which could be indicative of urbanization and development. However, without more detailed information or a higher-resolution image, it's difficult to make definitive statements about the environmental health of the area.","Describe this satellite image in detail. Focus on visible land cover, vegetation, forest density, bare soil, roads, urban development, water bodies, smoke, fire scars, mining, flooding, erosion, deforestation, pollution, or any other signs of environmental stress.
-",llava,"Based on the satellite-image description, visible signs that may indicate environmental danger include:
-
-* Pollution (not visible in this image)
-* Bare soil (not visible in this image)
-* Deforestation (not visible in this image)
-* Flooding or erosion (not visible in this image)
-* Mining (not visible in this image)
-* Fire scars (not visible in this image)
-
-However, there are no visible signs of environmental danger in this image.
-
-Given the lack of visible signs of environmental stress and the absence of indicators such as pollution, bare soil, or deforestation, it is difficult to conclude that the area is clearly at environmental risk.
-
-Final label: N","You are assessing environmental risk from a satellite-image description. Based only on the description: 1. Briefly explain which visible signs may indicate environmental danger. 2. Decide whether the area is potentially at environmental risk. 3. End your answer with exactly one final label on a new line:
-   Y = at risk
-   N = not clearly at risk
-",llama3.2:3b,Y
+2026-03-12T21:41:20,38.7223,-9.1393,12,images/lat_38_7223_lon_m9_1393_zoom_12.png,"The image is a satellite view of a cityscape. The city is densely populated, with a mix of urban areas and green spaces. There are roads and buildings that are clearly visible, indicating a well-developed infrastructure. The city is surrounded by water bodies, suggesting it might be a coastal or riverfront city. There are no visible signs of fire or smoke, and no clear indications of mining or tailings. The vegetation density appears to be moderate, with patches of green interspersed among the urban areas. There are no signs of erosion or flooding in the visible areas. The overall image provides a comprehensive view of the city's layout and geographical features.","Describe this satellite image carefully.
+Focus only on what is clearly visible: - forest cover - clearings - roads - urban areas - water bodies - smoke - fire scars - mining pits - tailings - bare soil - erosion - flooding - vegetation density
+Do not speculate too much. Mention only features that are clearly visible. Keep the description concise, around 4-6 sentences.
+",llava,"Based on the satellite image description, the area appears to be at relatively low environmental risk. The presence of a mix of urban areas and green spaces suggests a well-managed urban planning, which may indicate a lower risk of environmental degradation. The absence of visible signs of pollution, mining, fire, or erosion also supports this assessment. Overall, the image suggests a stable and relatively healthy urban environment.","You are an environmental risk assessor.
+Based only on the satellite-image description, explain briefly whether the area may be at environmental risk.
+Consider visible evidence such as: - deforestation - mining - fire scars - smoke - flooding - severe erosion - strong pollution - major land degradation
+If none of these are clearly visible, explain why the area appears stable.
+Give a short explanation in 2-4 sentences.
+",llama3.2:3b,N
+2026-03-12T21:42:12,23.4162,25.6628,11,images/lat_23_4162_lon_25_6628_zoom_11.png,"The image is a satellite view of a desert landscape. The most striking feature is a large, dark red area that appears to be a dried-up lake bed or a mineral deposit. This area is surrounded by a lighter, more sandy terrain. There are patches of greenery scattered throughout the landscape, indicating sparse vegetation. The overall color palette of the image is dominated by shades of red, orange, and brown, with the darkest areas being the most prominent. There are no clear signs of urban development or roads, and no water bodies are visible. The image does not show any smoke, fire scars, mining pits, tailings, bare soil, erosion, or flooding. The vegetation density is low, with the greenery appearing sporadic and not forming any significant clusters.","Describe this satellite image carefully.
+Focus only on what is clearly visible: - forest cover - clearings - roads - urban areas - water bodies - smoke - fire scars - mining pits - tailings - bare soil - erosion - flooding - vegetation density
+Do not speculate too much. Mention only features that are clearly visible. Keep the description concise, around 4-6 sentences.
+",llava,"Based on the satellite image description, the area appears to be at relatively low environmental risk. The dominant features of the image, such as the large, dark red area and the sparse vegetation, suggest a stable desert landscape with minimal signs of human activity or environmental degradation. The lack of visible pollution, erosion, or flooding also supports this assessment, indicating that the area may be in a state of natural equilibrium.","You are an environmental risk assessor.
+Based only on the satellite-image description, explain briefly whether the area may be at environmental risk.
+Consider visible evidence such as: - deforestation - mining - fire scars - smoke - flooding - severe erosion - strong pollution - major land degradation
+If none of these are clearly visible, explain why the area appears stable.
+Give a short explanation in 2-4 sentences.
+",llama3.2:3b,N
+2026-03-12T21:43:13,39.8756,-120.435,12,images/lat_39_8756_lon_m120_4350_zoom_12.png,"The satellite image presents a detailed view of a mountainous region. The landscape is dominated by a dense forest cover, with patches of bare soil and sparse vegetation. There are clearings and roads cutting through the greenery, indicating human activity. A few water bodies are visible, possibly lakes or rivers, adding to the natural beauty of the area. There are no signs of smoke, fire scars, mining pits, or tailings, suggesting a relatively pristine environment. The image does not provide information on urban areas, erosion, or flooding. The vegetation density appears to be high, with the forested areas occupying a significant portion of the image.","Describe this satellite image carefully.
+Focus only on what is clearly visible: - forest cover - clearings - roads - urban areas - water bodies - smoke - fire scars - mining pits - tailings - bare soil - erosion - flooding - vegetation density
+Do not speculate too much. Mention only features that are clearly visible. Keep the description concise, around 4-6 sentences.
+",llava,"Based on the satellite image description, the area appears to be at relatively low environmental risk. The dense forest cover and high vegetation density suggest a stable ecosystem, with no visible signs of deforestation, mining, or pollution. The presence of clearings and roads indicates human activity, but it does not appear to be causing significant harm to the environment. Overall, the image suggests a pristine and natural environment with minimal human impact.","You are an environmental risk assessor.
+Based only on the satellite-image description, explain briefly whether the area may be at environmental risk.
+Consider visible evidence such as: - deforestation - mining - fire scars - smoke - flooding - severe erosion - strong pollution - major land degradation
+If none of these are clearly visible, explain why the area appears stable.
+Give a short explanation in 2-4 sentences.
+",llama3.2:3b,N
