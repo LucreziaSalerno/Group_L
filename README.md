@@ -114,6 +114,16 @@ The AI models and prompts are configured in **models.yaml**, allowing the workfl
 
 ---
 
+## Contribution to the UN Sustainable Development Goals (SDGs)
+
+Artificial intelligence and satellite imagery analysis can play an important role in supporting environmental monitoring and sustainability initiatives. By automatically analyzing satellite images and identifying potential environmental risks, the system could help detect land disturbances such as mining activity, large-scale excavation, or other environmental changes. 
+
+This type of automated analysis could support better-informed decision making and help protect ecosystems, urban environments, and natural resources. It could assist environmental agencies, NGOs, and researchers by offering a faster way to screen large geographic areas and identify locations that may require further investigation. While the system does not replace expert environmental analysis, it can serve as an initial screening tool that helps prioritize where detailed environmental assessments should be conducted. 
+
+Through these capabilities, the project contributes to broader sustainability efforts by supporting environmental monitoring and responsible management of natural resources, which are central objectives of several UN Sustainable Development Goals.
+
+---
+
 ## Example Results
 
 ### Mining Area - Risk Detected (Y)
@@ -130,7 +140,7 @@ Risk Assessment: **Potential environmental risk detected**
 
 ---
 
-### Lisbon Urban Area - No risk degtected (N)
+### Lisbon Urban Area - No risk detected (N)
 
 Latitude: 38.7223  
 Longitude: -9.1393  
