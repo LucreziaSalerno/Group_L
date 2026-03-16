@@ -62,6 +62,8 @@ def find_existing_result(
     return result.iloc[-1]
 
 
+from app.models import ImageRecord
+
 def append_result(
     latitude: float,
     longitude: float,
@@ -78,20 +80,19 @@ def append_result(
     """Append one run to the CSV database."""
     df = load_database()
 
-    new_row = {
-        "timestamp": datetime.now().isoformat(timespec="seconds"),
-        "latitude": latitude,
-        "longitude": longitude,
-        "zoom": zoom,
-        "image_path": image_path,
-        "image_description": image_description,
-        "image_prompt": image_prompt,
-        "image_model": image_model,
-        "text_description": text_description,
-        "text_prompt": text_prompt,
-        "text_model": text_model,
-        "danger": danger,
-    }
+    record = ImageRecord(
+        latitude=latitude,
+        longitude=longitude,
+        zoom=zoom,
+        image_path=image_path,
+        image_description=image_description,
+        image_prompt=image_prompt,
+        image_model=image_model,
+        text_description=text_description,
+        text_prompt=text_prompt,
+        text_model=text_model,
+        danger=danger,
+    )
 
-    df = pd.concat([df, pd.DataFrame([new_row])], ignore_index=True)
+    df = pd.concat([df, pd.DataFrame([record.model_dump()])], ignore_index=True)
     df.to_csv(DATABASE_PATH, index=False)

@@ -25,10 +25,14 @@ def load_database_cached():
     return load_database()
 
 
+from app.models import AppConfig
+
 @st.cache_data
 def load_models_config() -> dict:
     with open("models.yaml", "r", encoding="utf-8") as file:
-        return yaml.safe_load(file)
+        data = yaml.safe_load(file)
+        config = AppConfig(**data)
+        return config.model_dump()
 
 
 def get_preset_values(preset_name: str) -> tuple[float, float, int]:
