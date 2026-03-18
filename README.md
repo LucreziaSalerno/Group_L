@@ -148,9 +148,9 @@ Although the app does not directly measure water quality, environmental disturba
 
 ### Mining Area - Risk Detected (Y)
 
-Latitude: 40.5230
-Longitude: -112.1510
-Zoom: 13
+**Latitude:** 40.5230  
+**Longitude:** -112.1510  
+**Zoom:** 13
 
 ![Mining Area Example](images/example_mining.png)
 
@@ -162,9 +162,9 @@ Risk Assessment: **Potential environmental risk detected**
 
 ### Lisbon Urban Area - No risk detected (N)
 
-Latitude: 38.7223  
-Longitude: -9.1393  
-Zoom: 12  
+**Latitude:** 38.7223  
+**Longitude:** -9.1393  
+**Zoom:** 12  
 
 ![Lisbon Example](images/example_lisbon.png)
 
@@ -176,9 +176,9 @@ Risk assessment: **No clear environmental risk detected**
 
 ### Sahara Desert - No risk detected (N)
 
-Latitude: 23.4162  
-Longitude: 25.6628  
-Zoom: 11  
+**Latitude:** 23.4162  
+**Longitude:** 25.6628  
+**Zoom:** 11  
 
 ![Sahara Example](images/example_sahara.png)
 
