@@ -16,7 +16,6 @@ from app.storage import append_result, find_existing_result, load_database
 
 st.set_page_config(
     page_title="Environmental Risk Analyzer",
-    page_icon="🌍",
     layout="wide"
 )
 
@@ -25,10 +24,14 @@ def load_database_cached():
     return load_database()
 
 
+from app.models import AppConfig
+
 @st.cache_data
 def load_models_config() -> dict:
     with open("models.yaml", "r", encoding="utf-8") as file:
-        return yaml.safe_load(file)
+        data = yaml.safe_load(file)
+        config = AppConfig(**data)
+        return config.model_dump()
 
 
 def get_preset_values(preset_name: str) -> tuple[float, float, int]:
@@ -46,6 +49,9 @@ def get_preset_values(preset_name: str) -> tuple[float, float, int]:
 
         # stronger open-pit mining candidate
         "Mining area": (40.5230, -112.1510, 13),
+
+        "Chuquicamata Copper Mine": (-22.2885, -68.9000, 12),
+        "Rondonia Deforestation": (-9.6000, -63.0000, 11),
     }
     return presets.get(preset_name, presets["Custom"])
 
@@ -101,35 +107,25 @@ def build_click_map(latitude: float, longitude: float, zoom: int) -> folium.Map:
 
 
 def show_result_summary(danger: str, source_label: str) -> None:
-    """Show the main result summary block."""
-    st.header("Analysis Result")
+    """Show the main result summary block with a proper dashboard layout."""
+    st.header("Analysis Dashboard Overview")
 
-    # Tiny visual improvement
-    badge = "⚠ High environmental concern" if danger == "Y" else "✔️ Stable / low environmental concern"
-    st.markdown(f"**Assessment summary:** {badge}")
-    st.progress(100 if danger == "Y" else 35)
+    is_danger = (danger == "Y")
+    status_text = "High Risk Detected" if is_danger else "Stable / Low Concern"
+    
+    dash_col1, dash_col2 = st.columns(2)
+    with dash_col1:
+        st.metric("Classification", danger)
+    with dash_col2:
+        st.metric("Assessment Status", status_text)
 
-    # Explicit final label
-    label_color = "red" if danger == "Y" else "green"
-    st.markdown(
-        f"**Final classification:** <span style='color:{label_color}; font-weight:bold; font-size:20px'>{danger}</span>", unsafe_allow_html=True
-    )
-
-    # Optional confidence line
-    confidence = "Medium" if danger == "Y" else "Medium"
-    st.markdown(f"**Confidence:** {confidence}")
-
-    col1, col2, col3 = st.columns(3)
-    col1.metric("Latitude", f"{latitude:.4f}")
-    col2.metric("Longitude", f"{longitude:.4f}")
-    col3.metric("Zoom", zoom)
-
+    st.progress(100 if is_danger else 25, text="Risk Assessment Confidence Score")
     st.caption(source_label)
 
-    if danger == "Y":
-        st.error("⚠️ Potential environmental risk detected.")
+    if is_danger:
+        st.error("Potential environmental risk detected in this region based on satellite image analysis. Further investigation is recommended.")
     else:
-        st.success("✅ No clear environmental risk detected.")
+        st.success("No clear environmental risk detected in the analyzed visible range. Area appears stable.")
 
 st.divider()
 
@@ -138,7 +134,7 @@ config = load_models_config()
 images_dir = Path("images")
 images_dir.mkdir(exist_ok=True)
 
-st.title("🌍 Environmental Risk Analyzer")
+st.title("Environmental Risk Analyzer")
 st.caption("Analyze satellite images with local AI models to detect potential environmental risks.")
 st.markdown(
     """
@@ -160,6 +156,8 @@ with st.sidebar:
             "Sahara desert",
             "California wildfire area",
             "Mining area",
+            "Chuquicamata Copper Mine",
+            "Rondonia Deforestation",
         ],
         key="preset",
         on_change=apply_preset,
@@ -386,7 +384,7 @@ if not db_preview.empty:
 
     # Make danger column easier to read
     db_preview["danger"] = db_preview["danger"].map(
-        {"Y": "⚠ Risk", "N": "✔ Safe"}
+        {"Y": "Risk", "N": "Safe"}
     )
     available_columns = [col for col in preview_columns if col in db_preview.columns]
     st.dataframe(

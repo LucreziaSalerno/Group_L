@@ -187,3 +187,31 @@ The model correctly recognizes the landscape as a natural desert environment wit
 Risk assessment: **No clear environmental risk detected**
 
 ---
+
+### Rondonia Deforestation - Risk Detected (Y)
+
+Latitude: -9.6000  
+Longitude: -63.0000  
+Zoom: 11  
+
+![Rondonia Deforestation Example](images/example_rondonia.png)
+
+The satellite image reveals widespread deforestation with clear-cut areas and fragmented forest cover, indicating major land degradation and active habitat loss.
+
+Risk assessment: **Potential environmental risk detected**
+
+---
+
+### Chuquicamata Copper Mine - Risk Detected (Y)
+
+Latitude: -22.2885  
+Longitude: -68.9000  
+Zoom: 12  
+
+![Chuquicamata Mine Example](images/example_chuquicamata.png)
+
+The model detects a massive open-pit mining operation with extensive areas of bare soil, tailings, and severe land degradation.
+
+Risk assessment: **Potential environmental risk detected**
+
+---
